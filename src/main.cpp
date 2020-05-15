@@ -36,8 +36,8 @@ int main() {
   PID pid;
   PID pid_speed;
   // Initialize the pid variable.
-  pid.Init(0.2, 0.0, 4.0);
-  pid_speed.Init(0.15, 0.0, 0.1);
+  pid.Init(0.2, 0., 4.);
+  pid_speed.Init(0.15, 0., 0.1);
 
   h.onMessage([&pid, &pid_speed](uWS::WebSocket<uWS::SERVER> ws, char *data, size_t length, 
                      uWS::OpCode opCode) {
@@ -58,12 +58,12 @@ int main() {
           double speed = std::stod(j[1]["speed"].get<string>());
           double angle = std::stod(j[1]["steering_angle"].get<string>());
           double steer_value;
-          double target_speed = 60. - 7. * sqrt(abs(angle));
+          double target_speed = 65. - 7. * sqrt(abs(angle));
           double cte_speed = speed - target_speed;
           double throttle;
-          std::cout << "Angle: " << angle << std::endl;
-          std::cout << "Speed: " << speed << std::endl;
-          std::cout << "Target Speed: " << target_speed << std::endl;
+          // std::cout << "Angle: " << angle << std::endl;
+          // std::cout << "Speed: " << speed << std::endl;
+          // std::cout << "Target Speed: " << target_speed << std::endl;
 
           // Calculate steering value here, the steering value is [-1, 1].
           
@@ -86,10 +86,11 @@ int main() {
            */
           
           // DEBUG
-          std::cout << "CTE: " << cte << " Steering Value: " << steer_value 
-                    << std::endl;
-          std::cout << "CTE Speed: " << cte_speed << " Throttle: " << throttle
-                    << std::endl;
+          // std::cout << "Cum Abs Error: " << pid.GetCumulativeError() << std::endl;
+          // std::cout << "CTE: " << cte << " Steering Value: " << steer_value 
+          //           << std::endl;
+          // std::cout << "CTE Speed: " << cte_speed << " Throttle: " << throttle
+          //           << std::endl;
 
           json msgJson;
           msgJson["steering_angle"] = steer_value;

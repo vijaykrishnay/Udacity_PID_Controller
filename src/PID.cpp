@@ -1,5 +1,5 @@
 #include "PID.h"
-
+#include <math.h>
 
 PID::PID() {}
 
@@ -20,9 +20,14 @@ void PID::UpdateError(double cte) {
   d_error = cte - p_error;
   p_error = cte;
   i_error += cte;
+  cumulative_abs_error += abs(cte);
 }
 
 double PID::TotalError() {
   // Calculate and return the total error
   return - (Kp * p_error + Ki * i_error * i_error + Kd * d_error);  // TODO: Add your total error calc here!
+}
+
+double PID::GetCumulativeError() {
+  return cumulative_abs_error;
 }
