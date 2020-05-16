@@ -61,6 +61,7 @@ int main() {
           double target_speed = 65. - 7. * sqrt(abs(angle));
           double cte_speed = speed - target_speed;
           double throttle;
+          // std::cout << "CTE: " <<  << std::endl;
           // std::cout << "Angle: " << angle << std::endl;
           // std::cout << "Speed: " << speed << std::endl;
           // std::cout << "Target Speed: " << target_speed << std::endl;

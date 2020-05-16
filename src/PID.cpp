@@ -25,7 +25,7 @@ void PID::UpdateError(double cte) {
 
 double PID::TotalError() {
   // Calculate and return the total error
-  return - (Kp * p_error + Ki * i_error * i_error + Kd * d_error);  // TODO: Add your total error calc here!
+  return - (Kp * p_error + Ki * i_error * i_error + Kd * d_error);
 }
 
 double PID::GetCumulativeError() {
